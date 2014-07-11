@@ -2,7 +2,7 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
     <Identity Id="799565f1-457b-429a-8b06-39fb8de521fb" Version="1.0" Language="en-US" Publisher="Silicon Shark Ltd" />
-    <DisplayName>Paster</DisplayName>
+    <DisplayName>xBehave.Net Paster</DisplayName>
     <Description>Takes a Gherkin scenario from the clipboard and pastes it as xBehave.Net code</Description>
   </Metadata>
   <Installation InstalledByMsi="false">
