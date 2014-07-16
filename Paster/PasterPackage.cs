@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Globalization;
-using System.Runtime.InteropServices;
 using System.ComponentModel.Design;
-using Microsoft.Win32;
-using Microsoft.VisualStudio;
-using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.VisualStudio.OLE.Interop;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using EnvDTE;
+using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
 
 namespace SiliconSharkLtd.Paster
@@ -41,13 +38,14 @@ namespace SiliconSharkLtd.Paster
         /// </summary>
         public PasterPackage()
         {
-            Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", this.ToString()));
+            Debug.WriteLine("Entering constructor for: {0}",
+                            ToString());
         }
-
 
 
         /////////////////////////////////////////////////////////////////////////////
         // Overridden Package Implementation
+
         #region Package Members
 
         /// <summary>
@@ -56,19 +54,23 @@ namespace SiliconSharkLtd.Paster
         /// </summary>
         protected override void Initialize()
         {
-            Debug.WriteLine (string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
+            Debug.WriteLine("Entering Initialize() of: {0}",
+                            ToString());
             base.Initialize();
 
             // Add our command handlers for menu (commands must exist in the .vsct file)
-            OleMenuCommandService mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
-            if ( null != mcs )
+            var mcs = GetService(typeof (IMenuCommandService)) as OleMenuCommandService;
+            if (null != mcs)
             {
                 // Create the command for the menu item.
-                CommandID menuCommandID = new CommandID(GuidList.guidPasterCmdSet, (int)PkgCmdIDList.cmdidMyCommand);
-                MenuCommand menuItem = new MenuCommand(MenuItemCallback, menuCommandID );
-                mcs.AddCommand( menuItem );
+                var menuCommandId = new CommandID(GuidList.guidPasterCmdSet,
+                                                  (int) PkgCmdIDList.cmdidMyCommand);
+                var menuItem = new MenuCommand(MenuItemCallback,
+                                               menuCommandId);
+                mcs.AddCommand(menuItem);
             }
         }
+
         #endregion
 
         /// <summary>
@@ -76,25 +78,12 @@ namespace SiliconSharkLtd.Paster
         /// See the Initialize method to see how the menu item is associated to this function using
         /// the OleMenuCommandService service and the MenuCommand class.
         /// </summary>
-        private void MenuItemCallback(object sender, EventArgs e)
+        private void MenuItemCallback(object sender,
+                                      EventArgs e)
         {
-            // Show a Message Box to prove we were here
-            IVsUIShell uiShell = (IVsUIShell)GetService(typeof(SVsUIShell));
-            Guid clsid = Guid.Empty;
-            int result;
-            Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(uiShell.ShowMessageBox(
-                       0,
-                       ref clsid,
-                       "xBehave.Net Code Paster",
-                       string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.ToString()),
-                       string.Empty,
-                       0,
-                       OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                       OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST,
-                       OLEMSGICON.OLEMSGICON_INFO,
-                       0,        // false
-                       out result));
+            var dte = (DTE2) GetService(typeof (DTE));
+            var gherkinPaster = new GherkinPaster(new EnvironmentShim(dte));
+            gherkinPaster.PasteGherkin(ClipboardShim.Instance);
         }
-
     }
 }
