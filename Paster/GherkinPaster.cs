@@ -1,43 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SiliconSharkLtd.Paster
 {
-    internal enum Identifier
-    {
-        Given,
-        When,
-        Then,
-        And,
-        NOP
-    }
-
     public class GherkinPaster
     {
         private readonly IEnvironment _environment;
 
-        private static readonly Dictionary<Identifier, Func<string, string>> Formatters = new Dictionary<Identifier, Func<string, string>>
-        {
-            {
-                Identifier.Given, line => String.Format(@"""{0}"".Given(() => {{}});",
-                                                        line)
-            },
-            {
-                Identifier.When, line => String.Format(@"""{0}"".When(() => {{}});",
-                                                       line)
-            },
-            {
-                Identifier.Then, line => String.Format(@"""{0}"".Then(() => {{}});",
-                                                       line)
-            },
-            {
-                Identifier.And, line => String.Format(@"""{0}"".And(() => {{}});",
-                                                      line)
-            },
-            {Identifier.NOP, line => String.Empty},
-        };
 
         public GherkinPaster(IEnvironment environment)
         {
@@ -53,16 +22,12 @@ namespace SiliconSharkLtd.Paster
                                     .Split(new[] {Environment.NewLine},
                                            StringSplitOptions.RemoveEmptyEntries)
                                     .Select(s => s.Trim());
-            var sb = new StringBuilder();
 
-            foreach (var line in gherkinText)
-            {
-                var id = GWTIdentify(line);
-                var code = Formatters[id](line);
-                sb.AppendLine(code);
-            }
+            var gherkinTree = new GherkinTree(LineGenerators.CSharp,
+                                              GWTIdentify);
+            gherkinTree.AddLines(gherkinText);
 
-            _environment.Paste(sb.ToString());
+            _environment.Paste(gherkinTree.ToString());
         }
 
         private static Identifier GWTIdentify(string line)
@@ -79,6 +44,9 @@ namespace SiliconSharkLtd.Paster
             if (line.StartsWith("and",
                                 StringComparison.InvariantCultureIgnoreCase))
                 return Identifier.And;
+            if (line.StartsWith("scenario",
+                                StringComparison.InvariantCultureIgnoreCase))
+                return Identifier.Scenario;
             return Identifier.NOP;
         }
     }
