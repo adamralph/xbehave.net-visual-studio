@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EnvDTE80;
 using FakeItEasy;
-using SiliconSharkLtd.Paster;
+using xBehave.Paster.System;
 
 namespace Paster.Specs.Fakes
 {

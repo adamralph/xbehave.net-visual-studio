@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace SiliconSharkLtd.Paster
+namespace xBehave.Paster.System
 {
     internal sealed class ClipboardShim : IClipboard
     {

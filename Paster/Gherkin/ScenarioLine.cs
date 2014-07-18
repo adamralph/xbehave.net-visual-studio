@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using xBehave.Paster.System;
 
-namespace SiliconSharkLtd.Paster
+namespace xBehave.Paster.Gherkin
 {
 
     internal class ScenarioLine : IList<IStringAppender>, IStringAppender

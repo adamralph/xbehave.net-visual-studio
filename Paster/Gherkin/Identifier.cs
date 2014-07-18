@@ -1,4 +1,4 @@
-namespace SiliconSharkLtd.Paster
+namespace xBehave.Paster.Gherkin
 {
     internal enum Identifier
     {

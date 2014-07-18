@@ -1,4 +1,4 @@
-﻿using SiliconSharkLtd.Paster;
+﻿using xBehave.Paster.System;
 
 namespace Paster.Specs.Fakes
 {

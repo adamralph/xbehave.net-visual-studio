@@ -1,6 +1,7 @@
 using System.Text;
+using xBehave.Paster.System;
 
-namespace SiliconSharkLtd.Paster
+namespace xBehave.Paster.Gherkin
 {
     internal class NOPLine : IStringAppender
     {

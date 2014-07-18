@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace SiliconSharkLtd.Paster
+namespace xBehave.Paster.System
 {
     internal interface IStringAppender
     {

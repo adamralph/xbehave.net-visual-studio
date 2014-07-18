@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
+using xBehave.Paster.System;
 
-namespace SiliconSharkLtd.Paster
+namespace xBehave.Paster.Gherkin
 {
     public class GherkinPaster
     {

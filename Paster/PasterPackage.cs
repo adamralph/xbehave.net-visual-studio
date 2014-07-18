@@ -5,8 +5,10 @@ using System.Runtime.InteropServices;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
+using xBehave.Paster.Gherkin;
+using xBehave.Paster.System;
 
-namespace SiliconSharkLtd.Paster
+namespace xBehave.Paster
 {
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.

@@ -1,4 +1,4 @@
-namespace SiliconSharkLtd.Paster
+namespace xBehave.Paster.System
 {
     public interface IEnvironment
     {

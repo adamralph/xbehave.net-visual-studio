@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace SiliconSharkLtd.Paster
+namespace xBehave.Paster.Gherkin
 {
     internal static class LineGenerators
     {

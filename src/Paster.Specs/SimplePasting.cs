@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using System.Text;
 using FluentAssertions;
 using Paster.Specs.Fakes;
-using SiliconSharkLtd.Paster;
 using Xbehave;
+using xBehave.Paster.Gherkin;
+using xBehave.Paster.System;
 
 namespace Paster.Specs
 {
@@ -24,31 +24,6 @@ namespace Paster.Specs
             "Then only a single line is received by the environment".Then(() => environment.LinesWritten.Count()
                                                                                            .Should()
                                                                                            .Be(1));
-        }
-
-        [Scenario]
-        public void MultiLinePaste(IClipboard clipboard,
-                                   GherkinPaster sut,
-                                   TestEnvironment environment)
-        {
-            "Given a complete system".Given(() =>
-            {
-                environment = FakesLibrary.CreateDefaultEnvironment();
-                sut = new GherkinPaster(environment);
-            });
-            "And multiple lines of valid gherkin".And(() =>
-            {
-                var sb = new StringBuilder();
-                sb.AppendLine("Given a line");
-                sb.AppendLine("And a line");
-                sb.AppendLine("When a line");
-                sb.AppendLine("Then a line");
-                clipboard = FakesLibrary.CreateShim(sb.ToString());
-            });
-            "When the gherkin is pasted".When(() => sut.PasteGherkin(clipboard));
-            "Then multiple lines is received by the environment".Then(() => environment.LinesWritten.Count()
-                                                                                       .Should()
-                                                                                       .Be(4));
         }
     }
 }

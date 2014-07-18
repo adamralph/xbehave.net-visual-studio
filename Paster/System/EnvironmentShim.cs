@@ -1,7 +1,7 @@
 ﻿using EnvDTE;
 using EnvDTE80;
 
-namespace SiliconSharkLtd.Paster
+namespace xBehave.Paster.System
 {
     internal class EnvironmentShim : IEnvironment
     {

@@ -1,7 +1,7 @@
 ﻿// PkgCmdID.cs
 // MUST match PkgCmdID.h
 
-namespace SiliconSharkLtd.Paster
+namespace xBehave.Paster
 {
     // ReSharper disable InconsistentNaming
     internal static class PkgCmdIDList
