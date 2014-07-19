@@ -144,7 +144,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Paster\Paster.csproj">
+    <ProjectReference Include="..\Paster\Paster.csproj">
       <Project>{e9b68d8f-23bc-461d-ae5c-0f56d6fd9df7}</Project>
       <Name>Paster</Name>
     </ProjectReference>

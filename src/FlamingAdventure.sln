@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paster", "..\Paster\Paster.csproj", "{E9B68D8F-23BC-461D-AE5C-0F56D6FD9DF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paster", "Paster\Paster.csproj", "{E9B68D8F-23BC-461D-AE5C-0F56D6FD9DF7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paster.Specs", "Paster.Specs\Paster.Specs.csproj", "{16F68909-7EB4-4F39-B39E-428B277745DA}"
 EndProject
