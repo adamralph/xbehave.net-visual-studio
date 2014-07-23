@@ -7,7 +7,6 @@ using xBehave.Paster.System;
 
 namespace xBehave.Paster.Gherkin
 {
-
     internal class ScenarioLine : IList<IStringAppender>, IStringAppender
     {
         private readonly string _textLine;
@@ -15,11 +14,14 @@ namespace xBehave.Paster.Gherkin
 
         public ScenarioLine(string textLine)
         {
-            _textLine = textLine.Substring(8);//Remove 'scenario'
+            _textLine = textLine.Substring(8); //Remove 'scenario'
+
             if (_textLine[0] == ':')
-            {
                 _textLine = _textLine.Substring(1);
-            }
+
+            _textLine = _textLine.Replace(@"""",
+                                          "");
+
             _textLine = MethodCase(_textLine);
         }
 
@@ -35,9 +37,7 @@ namespace xBehave.Paster.Gherkin
                     methodNameChars.Add(Char.ToUpper(chars[index]));
                 }
                 else
-                {
                     methodNameChars.Add(chars[index]);
-                }
             }
 
             return new string(methodNameChars.ToArray());
@@ -50,9 +50,7 @@ namespace xBehave.Paster.Gherkin
                             _textLine,
                             Environment.NewLine);
             foreach (var appender in _lines)
-            {
                 appender.Append(sb);
-            }
             sb.AppendLine("}");
         }
 

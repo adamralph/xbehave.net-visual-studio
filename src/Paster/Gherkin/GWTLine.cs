@@ -12,7 +12,7 @@ namespace xBehave.Paster.Gherkin
         public GWTLine(string textLine,
                        Identifier gherkinType)
         {
-            _textLine = textLine;
+            _textLine = textLine.Replace("\"","\\\"");
             _gherkinType = gherkinType;
         }
 
