@@ -122,9 +122,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gherkin\GherkinPaster.cs" />
-    <Compile Include="Gherkin\GWTLine.cs" />
-    <Compile Include="Gherkin\Identifier.cs" />
-    <Compile Include="Gherkin\NOPLine.cs" />
+    <Compile Include="Gherkin\Instruction.cs" />
+    <Compile Include="Gherkin\Gherkin.cs" />
     <Compile Include="Gherkin\ScenarioLine.cs" />
     <Compile Include="Gherkin\Tree\CanAddInstruction.cs" />
     <Compile Include="Gherkin\Tree\CanAddScenario.cs" />

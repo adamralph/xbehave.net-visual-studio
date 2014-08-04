@@ -16,9 +16,9 @@ namespace xBehave.Paster.Gherkin
             return treeStateExistingScenario(this);
         }
 
-        public TreeState AddInstruction(string rawLine, Identifier rawType)
+        public TreeState AddInstruction(string rawLine, Gherkin rawType)
         {
-            var node = new GWTLine(rawLine, rawType);
+            var node = new Instruction(rawLine, rawType);
             _tree.AddNode(node);
             return this;
         }
