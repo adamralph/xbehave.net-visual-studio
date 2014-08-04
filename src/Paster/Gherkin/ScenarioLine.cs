@@ -7,7 +7,9 @@ using xBehave.Paster.System;
 
 namespace xBehave.Paster.Gherkin
 {
-    internal class ScenarioLine : IList<IStringAppender>, IStringAppender
+    internal interface StringAppenderCollection : IList<IStringAppender>, IStringAppender { }
+
+    internal class ScenarioLine : StringAppenderCollection
     {
         private readonly string _textLine;
         private readonly IList<IStringAppender> _lines = new List<IStringAppender>();
