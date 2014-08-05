@@ -132,6 +132,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BadSourceData.cs" />
     <Compile Include="EscapeCharacters.cs" />
     <Compile Include="Fakes\ClipboardShim.cs" />
     <Compile Include="Fakes\FakesLibrary.cs" />

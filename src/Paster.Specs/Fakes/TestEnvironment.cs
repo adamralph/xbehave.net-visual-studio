@@ -8,6 +8,12 @@ namespace Paster.Specs.Fakes
         public string TextWritten { get; set; }
         public string[] LinesWritten { get; set; }
 
+        public TestEnvironment()
+        {
+            TextWritten = string.Empty;
+            LinesWritten = new string[0];
+        }
+
         public void Paste(string codeLines)
         {
             TextWritten = codeLines;
