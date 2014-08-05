@@ -3,7 +3,7 @@ using xBehave.Paster.System;
 
 namespace Paster.Specs.Fakes
 {
-    public class TestEnvironment : IEnvironment
+    public class TestEnvironment : DevelopmentEnvironment
     {
         public string TextWritten { get; set; }
         public string[] LinesWritten { get; set; }
@@ -11,8 +11,7 @@ namespace Paster.Specs.Fakes
         public void Paste(string codeLines)
         {
             TextWritten = codeLines;
-            LinesWritten = codeLines.Split(new[] {Environment.NewLine},
-                                           StringSplitOptions.RemoveEmptyEntries);
+            LinesWritten = codeLines.Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
         }
     }
 }

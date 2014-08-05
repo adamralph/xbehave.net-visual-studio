@@ -7,14 +7,14 @@ namespace xBehave.Paster.Gherkin
 {
     public class GherkinPaster
     {
-        private readonly IEnvironment _environment;
+        private readonly DevelopmentEnvironment _environment;
 
-        public GherkinPaster(IEnvironment environment)
+        public GherkinPaster(DevelopmentEnvironment environment)
         {
             _environment = environment;
         }
 
-        public void PasteGherkin(IClipboard source)
+        public void PasteGherkin(EnvironmentClipboard source)
         {
             if (!source.ContainsText())
                 return;
@@ -29,66 +29,58 @@ namespace xBehave.Paster.Gherkin
             _environment.Paste(currentState.ToString());
         }
 
-        private static Gherkin GWTIdentify(string line)
+        private static LineType GWTIdentify(string line)
         {
             if (line.StartsWith("given", StringComparison.InvariantCultureIgnoreCase))
-                return Gherkin.Given;
+                return LineType.Given;
             if (line.StartsWith("when", StringComparison.InvariantCultureIgnoreCase))
-                return Gherkin.When;
+                return LineType.When;
             if (line.StartsWith("then", StringComparison.InvariantCultureIgnoreCase))
-                return Gherkin.Then;
+                return LineType.Then;
             if (line.StartsWith("and", StringComparison.InvariantCultureIgnoreCase))
-                return Gherkin.And;
+                return LineType.And;
             if (line.StartsWith("scenario", StringComparison.InvariantCultureIgnoreCase))
-                return Gherkin.Scenario;
-            return Gherkin.NOP;
+                return LineType.Scenario;
+            return LineType.NOP;
         }
 
-        private readonly IDictionary<Gherkin, Func<TreeState, string, TreeState>> _transitions =
-            new Dictionary<Gherkin, Func<TreeState, string, TreeState>>
+        private readonly IDictionary<LineType, Func<TreeState, string, TreeState>> _transitions =
+            new Dictionary<LineType, Func<TreeState, string, TreeState>>
                 {
                     {
-                        Gherkin.Scenario,
+                        LineType.Scenario,
                         (state, rawLine) =>
-                        state.Transition(empty => empty.AddScenario(rawLine),
-                                         scenario => scenario.AddScenario(rawLine),
-                                         existing => existing)
+                        state.Transition(empty => empty.AddScenario(rawLine), scenario => scenario.AddScenario(rawLine), existing => existing)
                     },
                     {
-                        Gherkin.Given,
+                        LineType.Given,
                         (state, rawline) =>
-                        state.Transition(empty => empty.AddInstruction(rawline, Gherkin.Given),
-                                         scenario => scenario.AddInstruction(rawline, Gherkin.Given),
-                                         existing => existing.AddInstruction(rawline, Gherkin.Given))
+                        state.Transition(empty => empty.AddInstruction(rawline, LineType.Given),
+                                         scenario => scenario.AddInstruction(rawline, LineType.Given),
+                                         existing => existing.AddInstruction(rawline, LineType.Given))
                     },
                     {
-                        Gherkin.When,
+                        LineType.When,
                         (state, rawline) =>
-                        state.Transition(empty => empty.AddInstruction(rawline, Gherkin.When),
-                                         scenario => scenario.AddInstruction(rawline, Gherkin.When),
-                                         existing => existing.AddInstruction(rawline, Gherkin.When))
+                        state.Transition(empty => empty.AddInstruction(rawline, LineType.When),
+                                         scenario => scenario.AddInstruction(rawline, LineType.When),
+                                         existing => existing.AddInstruction(rawline, LineType.When))
                     },
                     {
-                        Gherkin.Then,
+                        LineType.Then,
                         (state, rawline) =>
-                        state.Transition(empty => empty.AddInstruction(rawline, Gherkin.Then),
-                                         scenario => scenario.AddInstruction(rawline, Gherkin.Then),
-                                         existing => existing.AddInstruction(rawline, Gherkin.Then))
+                        state.Transition(empty => empty.AddInstruction(rawline, LineType.Then),
+                                         scenario => scenario.AddInstruction(rawline, LineType.Then),
+                                         existing => existing.AddInstruction(rawline, LineType.Then))
                     },
                     {
-                        Gherkin.And,
+                        LineType.And,
                         (state, rawline) =>
-                        state.Transition(empty => empty.AddInstruction(rawline, Gherkin.And),
-                                         scenario => scenario.AddInstruction(rawline, Gherkin.And),
-                                         existing => existing.AddInstruction(rawline, Gherkin.And))
+                        state.Transition(empty => empty.AddInstruction(rawline, LineType.And),
+                                         scenario => scenario.AddInstruction(rawline, LineType.And),
+                                         existing => existing.AddInstruction(rawline, LineType.And))
                     },
-                    {
-                        Gherkin.NOP, 
-                        (state, rawline) => 
-                        state.Transition(empty => empty, 
-                                        scenario => scenario, 
-                                        existing => existing)
-                    }
+                    {LineType.NOP, (state, rawline) => state.Transition(empty => empty, scenario => scenario, existing => existing)}
                 };
     }
 }

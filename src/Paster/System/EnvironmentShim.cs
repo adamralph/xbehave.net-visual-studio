@@ -3,7 +3,7 @@ using EnvDTE80;
 
 namespace xBehave.Paster.System
 {
-    internal class EnvironmentShim : IEnvironment
+    internal class EnvironmentShim : DevelopmentEnvironment
     {
         private readonly DTE2 _dte;
 
@@ -14,7 +14,7 @@ namespace xBehave.Paster.System
 
         public void Paste(string codeLines)
         {
-            var currentDocument = (TextDocument)_dte.ActiveDocument.Object("TextDocument");
+            var currentDocument = (TextDocument) _dte.ActiveDocument.Object("TextDocument");
             var startPoint = currentDocument.Selection.ActivePoint.CreateEditPoint();
             var endPoint = currentDocument.Selection.ActivePoint.CreateEditPoint();
             var ownUndoContext = false;
@@ -31,9 +31,7 @@ namespace xBehave.Paster.System
             startPoint.SmartFormat(endPoint);
 
             if (ownUndoContext)
-            {
                 _dte.UndoContext.Close();
-            }
         }
     }
 }

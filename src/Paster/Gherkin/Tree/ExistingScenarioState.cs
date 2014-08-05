@@ -4,9 +4,12 @@ namespace xBehave.Paster.Gherkin
 {
     internal class ExistingScenarioState : TreeState, CanAddInstruction
     {
-        public ExistingScenarioState(SyntaxTree tree)
+        private readonly CodelessGroupingNode _group;
+
+        public ExistingScenarioState(SyntaxTree tree, CodelessGroupingNode groupingNode)
         {
-            _tree = tree;
+            _group = groupingNode;
+            Tree = tree;
         }
 
         public override TreeState Transition(Func<EmptyState, TreeState> treeStateEmpty,
@@ -16,10 +19,11 @@ namespace xBehave.Paster.Gherkin
             return treeStateExistingScenario(this);
         }
 
-        public TreeState AddInstruction(string rawLine, Gherkin rawType)
+        public TreeState AddInstruction(string rawLine, LineType rawType)
         {
             var node = new Instruction(rawLine, rawType);
-            _tree.AddNode(node);
+            _group.AddNode(node);
+
             return this;
         }
     }

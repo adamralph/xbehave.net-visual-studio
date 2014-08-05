@@ -2,6 +2,6 @@ namespace xBehave.Paster.Gherkin
 {
     internal interface CanAddInstruction
     {
-        TreeState AddInstruction(string rawLine, Gherkin rawType);
+        TreeState AddInstruction(string rawLine, LineType rawType);
     }
 }

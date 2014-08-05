@@ -2,7 +2,7 @@
 
 namespace Paster.Specs.Fakes
 {
-    internal class ClipboardShim : IClipboard
+    internal class ClipboardShim : Clipboard
     {
         private readonly string _text;
 

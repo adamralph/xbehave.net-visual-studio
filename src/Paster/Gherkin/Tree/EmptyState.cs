@@ -6,7 +6,7 @@ namespace xBehave.Paster.Gherkin
     {
         public EmptyState()
         {
-            _tree = new SyntaxTree();
+            Tree = new SyntaxTree();
         }
 
         public override TreeState Transition(Func<EmptyState, TreeState> treeStateEmpty,
@@ -16,18 +16,20 @@ namespace xBehave.Paster.Gherkin
             return treeStateEmpty(this);
         }
 
-        public TreeState AddInstruction(string rawLine, Gherkin rawType)
+        public TreeState AddInstruction(string rawLine, LineType rawType)
         {
+            var group = new CodelessGroupingNode();
             var node = new Instruction(rawLine, rawType);
-            _tree.AddNode(node);
-            return new ExistingScenarioState(_tree);
+            group.AddNode(node);
+            Tree.Add(group);
+            return new ExistingScenarioState(Tree, group);
         }
 
         public TreeState AddScenario(string rawLine)
         {
-            var node = new ScenarioLine(rawLine);
-            _tree.AddParent(node);
-            return new ScenarioState(_tree);
+            var group = new Scenario(rawLine.RemoveScenarioTag());
+            Tree.Add(group);
+            return new ScenarioState(Tree, group);
         }
     }
 }
