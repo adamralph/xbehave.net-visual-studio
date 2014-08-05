@@ -10,7 +10,7 @@ namespace Paster.Specs
     public class SimplePasting
     {
         [Scenario]
-        public void SingleLinePaste(Clipboard clipboard,
+        public void SingleLinePaste(EnvironmentClipboard clipboard,
                                     GherkinPaster sut,
                                     TestEnvironment environment)
         {
@@ -27,7 +27,7 @@ namespace Paster.Specs
         }
 
         [Scenario]
-        public void PastingDoubleQuotesInScenario(Clipboard clipboard,
+        public void PastingDoubleQuotesInScenario(EnvironmentClipboard clipboard,
                                                   GherkinPaster sut,
                                                   TestEnvironment environment)
         {
@@ -44,7 +44,7 @@ namespace Paster.Specs
         }
 
         [Scenario]
-        public void PAstingDoubleQuotesInGWTIClipboard(Clipboard clipboard,
+        public void PAstingDoubleQuotesInGWTIClipboard(EnvironmentClipboard clipboard,
                                                        GherkinPaster sut,
                                                        TestEnvironment environment)
         {

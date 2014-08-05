@@ -122,16 +122,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gherkin\GherkinPaster.cs" />
-    <Compile Include="Gherkin\Instruction.cs" />
+    <Compile Include="Gherkin\Data\Instruction.cs" />
     <Compile Include="Gherkin\LineType.cs" />
     <Compile Include="Gherkin\RawLineManipulations.cs" />
-    <Compile Include="Gherkin\Scenario.cs" />
-    <Compile Include="Gherkin\Tree\CanAddInstruction.cs" />
-    <Compile Include="Gherkin\Tree\CanAddScenario.cs" />
+    <Compile Include="Gherkin\Data\Scenario.cs" />
+    <Compile Include="Gherkin\Commands\CanAddInstruction.cs" />
+    <Compile Include="Gherkin\Commands\CanAddScenario.cs" />
     <Compile Include="Gherkin\Tree\CodelessGroupingNode.cs" />
-    <Compile Include="Gherkin\Tree\EmptyState.cs" />
-    <Compile Include="Gherkin\Tree\ExistingScenarioState.cs" />
-    <Compile Include="Gherkin\Tree\ScenarioState.cs" />
+    <Compile Include="Gherkin\States\EmptyState.cs" />
+    <Compile Include="Gherkin\States\ExistingScenarioState.cs" />
+    <Compile Include="Gherkin\States\ScenarioState.cs" />
     <Compile Include="Gherkin\Tree\SyntaxGroupingNode.cs" />
     <Compile Include="Gherkin\Tree\SyntaxNode.cs" />
     <Compile Include="Gherkin\Tree\SyntaxTree.cs" />
