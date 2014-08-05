@@ -4,21 +4,22 @@ using Paster.Specs.Fakes;
 using Xbehave;
 using xBehave.Paster.Gherkin;
 using xBehave.Paster.System;
+using Xunit;
 
 namespace Paster.Specs
 {
-    public class GivenWhenThen
+    [Trait("Scenarios","")]
+    public class Scenarios
     {
         [Scenario(DisplayName = "Expected default use case")]
-        public void DefaultUseCase(EnvironmentClipboard clipboard,
-                                   GherkinPaster sut,
-                                   TestEnvironment environment)
+        public void DefaultUseCase(EnvironmentClipboard clipboard, GherkinPaster sut, TestEnvironment environment)
         {
             "Given a complete system".Given(() =>
             {
                 environment = FakesLibrary.CreateDefaultEnvironment();
                 sut = new GherkinPaster(environment);
             });
+
             "And a gherkin Scenario".And(() =>
             {
                 var sb = new StringBuilder();
@@ -29,9 +30,11 @@ namespace Paster.Specs
                 sb.AppendLine("Then a line");
                 clipboard = FakesLibrary.CreateShim(sb.ToString());
             });
+
             "When the gherkin is pasted".When(() => sut.PasteGherkin(clipboard));
 
-            "Then the output should be a method wrapping 4 strings with appropriate extension methods".Then(() => { var expectedOutput = @"[Scenario]
+            "Then the output should be a method wrapping 4 strings with appropriate extension methods".Then(
+                () => { var expectedOutput = @"[Scenario]
 public void TestingTheGherkinPaster()
 {
 ""Given a line"".Given(() => {});
@@ -40,9 +43,9 @@ public void TestingTheGherkinPaster()
 ""Then a line"".Then(() => {});
 }
 ";
-                                                                                                                      environment.TextWritten.Should()
-                                                                                                                                 .Be(expectedOutput);
-            });
+                          environment.TextWritten.Should()
+                                     .Be(expectedOutput);
+                });
         }
     }
 }
