@@ -16,8 +16,15 @@ namespace xBehave.Paster.Gherkin
         {
             var builder = new StringBuilder();
 
+            bool first = true;
             foreach (var node in _nodes)
+            {
+                if (first)
+                    first = false;
+                else
+                    builder.AppendLine();
                 node.Append(builder);
+            }
 
             return builder.ToString();
         }

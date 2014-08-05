@@ -132,13 +132,16 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BadSourceData.cs" />
+    <Compile Include="EscapeCharacters.cs" />
     <Compile Include="Fakes\ClipboardShim.cs" />
     <Compile Include="Fakes\FakesLibrary.cs" />
     <Compile Include="Fakes\TestEnvironment.cs" />
     <Compile Include="MakeGalioWork.cs" />
-    <Compile Include="GivenWhenThen.cs" />
+    <Compile Include="Scenarios.cs" />
     <Compile Include="SimplePasting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WithoutScenario.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
