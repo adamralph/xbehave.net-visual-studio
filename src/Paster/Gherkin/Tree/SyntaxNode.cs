@@ -1,8 +1,8 @@
 using System.Text;
 
-namespace xBehave.Paster.System
+namespace xBehave.Paster.Gherkin
 {
-    internal interface IStringAppender
+    internal interface SyntaxNode
     {
         void Append(StringBuilder sb);
     }

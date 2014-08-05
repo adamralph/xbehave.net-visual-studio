@@ -16,7 +16,7 @@ namespace Paster.Specs.Fakes
             return new TestEnvironment();
         }
 
-        public static IClipboard CreateShim(string text)
+        public static EnvironmentClipboard CreateShim(string text)
         {
             return new ClipboardShim(text);
         }

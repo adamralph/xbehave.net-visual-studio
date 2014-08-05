@@ -1,6 +1,6 @@
 ﻿namespace xBehave.Paster.System
 {
-    public interface IClipboard
+    public interface EnvironmentClipboard
     {
         string GetText();
         bool ContainsText();

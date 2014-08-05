@@ -1,6 +1,6 @@
 namespace xBehave.Paster.Gherkin
 {
-    internal enum Identifier
+    internal enum LineType
     {
         Given,
         When,

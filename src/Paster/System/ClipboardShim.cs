@@ -2,7 +2,7 @@
 
 namespace xBehave.Paster.System
 {
-    internal sealed class ClipboardShim : IClipboard
+    internal sealed class ClipboardShim : EnvironmentClipboard
     {
         private static readonly ClipboardShim _instance = new ClipboardShim();
 
@@ -14,7 +14,10 @@ namespace xBehave.Paster.System
 
         public static ClipboardShim Instance
         {
-            get { return _instance; }
+            get
+            {
+                return _instance;
+            }
         }
 
         public string GetText()

@@ -1,6 +1,6 @@
 namespace xBehave.Paster.System
 {
-    public interface IEnvironment
+    public interface DevelopmentEnvironment
     {
         void Paste(string codeLines);
     }

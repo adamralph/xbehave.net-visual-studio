@@ -10,7 +10,7 @@ namespace Paster.Specs
     public class GivenWhenThen
     {
         [Scenario(DisplayName = "Expected default use case")]
-        public void DefaultUseCase(IClipboard clipboard,
+        public void DefaultUseCase(EnvironmentClipboard clipboard,
                                    GherkinPaster sut,
                                    TestEnvironment environment)
         {
