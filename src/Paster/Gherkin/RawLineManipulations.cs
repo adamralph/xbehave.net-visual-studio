@@ -4,6 +4,20 @@ using System.Linq;
 
 namespace xBehave.Paster.Gherkin
 {
+    internal static class GherkinTokenExtensions
+    {
+        internal static IEnumerable<GherkinToken> MergeMultiLineTokens(this IEnumerable<GherkinToken> tokens)
+        {
+            foreach (var token in tokens)
+            {
+                if (token.Type != LineType.Example)
+                {
+                    yield return token;                    
+                }
+            }
+        }
+    }
+
     internal static class RawLineManipulations
     {
         internal static string EscapeDoubleQuotes(this string rawLine)
