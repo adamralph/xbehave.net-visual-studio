@@ -2,13 +2,13 @@ using System;
 
 namespace xBehave.Paster.Gherkin
 {
-    internal class ScenarioState : TreeState, CanAddScenario, CanAddInstruction
+    internal class ImpliedScenarioState : TreeState, CanAddInstruction
     {
-        private Scenario _group;
+        private readonly CodelessGroupingNode _group;
 
-        public ScenarioState(SyntaxTree tree, Scenario @group)
+        public ImpliedScenarioState(SyntaxTree tree, CodelessGroupingNode groupingNode)
         {
-            _group = @group;
+            _group = groupingNode;
             Tree = tree;
         }
 
@@ -17,18 +17,7 @@ namespace xBehave.Paster.Gherkin
                                              Func<ImpliedScenarioState, TreeState> stateImpliedScenario,
                                              Func<ScenarioOutlineState, TreeState> stateScenarioOutline)
         {
-            return stateScenario(this);
-        }
-
-        public TreeState AddScenario(string rawLine)
-        {
-            var text = rawLine.Trim()
-                              .RemoveScenarioTag();
-            _group = new Scenario(text);
-
-            Tree.Add(_group);
-
-            return this;
+            return stateImpliedScenario(this);
         }
 
         public TreeState AddInstruction(string rawLine, LineType rawType)

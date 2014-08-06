@@ -6,9 +6,10 @@ namespace xBehave.Paster.Gherkin
     {
         protected SyntaxTree Tree;
 
-        public abstract TreeState Transition(Func<EmptyState, TreeState> treeStateEmpty,
-                                             Func<ScenarioState, TreeState> treeStateScenario,
-                                             Func<ExistingScenarioState, TreeState> treeStateExistingScenario);
+        public abstract TreeState Transition(Func<EmptyState, TreeState> stateEmpty,
+                                             Func<ScenarioState, TreeState> stateScenario,
+                                             Func<ImpliedScenarioState, TreeState> stateImpliedScenario,
+                                             Func<ScenarioOutlineState, TreeState> stateScenarioOutline);
 
         public override string ToString()
         {

@@ -11,37 +11,47 @@ namespace xBehave.Paster.Gherkin
                     {
                         LineType.Scenario,
                         (state, rawLine) =>
-                        state.Transition(empty => empty.AddScenario(rawLine), scenario => scenario.AddScenario(rawLine), existing => existing)
+                        state.Transition(empty => empty.AddScenario(rawLine),
+                                         scenario => scenario.AddScenario(rawLine),
+                                         implied => implied,
+                                         outline => outline.AddScenario(rawLine))
                     },
                     {
                         LineType.Given,
                         (state, rawline) =>
                         state.Transition(empty => empty.AddInstruction(rawline, LineType.Given),
                                          scenario => scenario.AddInstruction(rawline, LineType.Given),
-                                         existing => existing.AddInstruction(rawline, LineType.Given))
+                                         implied => implied.AddInstruction(rawline, LineType.Given),
+                                         outline => outline.AddInstruction(rawline, LineType.Given))
                     },
                     {
                         LineType.When,
                         (state, rawline) =>
                         state.Transition(empty => empty.AddInstruction(rawline, LineType.When),
                                          scenario => scenario.AddInstruction(rawline, LineType.When),
-                                         existing => existing.AddInstruction(rawline, LineType.When))
+                                         implied => implied.AddInstruction(rawline, LineType.When),
+                                         outline => outline.AddInstruction(rawline, LineType.When))
                     },
                     {
                         LineType.Then,
                         (state, rawline) =>
                         state.Transition(empty => empty.AddInstruction(rawline, LineType.Then),
                                          scenario => scenario.AddInstruction(rawline, LineType.Then),
-                                         existing => existing.AddInstruction(rawline, LineType.Then))
+                                         implied => implied.AddInstruction(rawline, LineType.Then),
+                                         outline => outline.AddInstruction(rawline, LineType.Then))
                     },
                     {
                         LineType.And,
                         (state, rawline) =>
                         state.Transition(empty => empty.AddInstruction(rawline, LineType.And),
                                          scenario => scenario.AddInstruction(rawline, LineType.And),
-                                         existing => existing.AddInstruction(rawline, LineType.And))
+                                         implied => implied.AddInstruction(rawline, LineType.And),
+                                         outline => outline.AddInstruction(rawline, LineType.And))
                     },
-                    {LineType.NOP, (state, rawline) => state.Transition(empty => empty, scenario => scenario, existing => existing)}
+                    {
+                        LineType.NOP,
+                        (state, rawline) => state.Transition(empty => empty, scenario => scenario, implied => implied, outline => outline)
+                    }
                 };
     }
 }

@@ -9,11 +9,12 @@ namespace xBehave.Paster.Gherkin
             Tree = new SyntaxTree();
         }
 
-        public override TreeState Transition(Func<EmptyState, TreeState> treeStateEmpty,
-                                             Func<ScenarioState, TreeState> treeStateScenario,
-                                             Func<ExistingScenarioState, TreeState> treeStateExistingScenario)
+        public override TreeState Transition(Func<EmptyState, TreeState> stateEmpty,
+                                             Func<ScenarioState, TreeState> stateScenario,
+                                             Func<ImpliedScenarioState, TreeState> stateImpliedScenario,
+                                             Func<ScenarioOutlineState, TreeState> stateScenarioOutline)
         {
-            return treeStateEmpty(this);
+            return stateEmpty(this);
         }
 
         public TreeState AddInstruction(string rawLine, LineType rawType)
@@ -22,7 +23,7 @@ namespace xBehave.Paster.Gherkin
             var node = new Instruction(rawLine, rawType);
             group.AddNode(node);
             Tree.Add(group);
-            return new ExistingScenarioState(Tree, group);
+            return new ImpliedScenarioState(Tree, group);
         }
 
         public TreeState AddScenario(string rawLine)
