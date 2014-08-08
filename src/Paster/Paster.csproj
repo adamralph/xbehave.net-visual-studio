@@ -123,6 +123,8 @@
   <ItemGroup>
     <Compile Include="Gherkin\Commands\CanAddData.cs" />
     <Compile Include="Gherkin\Commands\CanAddExample.cs" />
+    <Compile Include="Gherkin\Commands\CanAddScenarioOutline.cs" />
+    <Compile Include="Gherkin\Data\ExampleValue.cs" />
     <Compile Include="Gherkin\GherkinPaster.cs" />
     <Compile Include="Gherkin\Data\Instruction.cs" />
     <Compile Include="Gherkin\GherkinToken.cs" />
@@ -142,6 +144,7 @@
     <Compile Include="Gherkin\Tree\SyntaxNode.cs" />
     <Compile Include="Gherkin\Tree\SyntaxTree.cs" />
     <Compile Include="Gherkin\States\TreeState.cs" />
+    <Compile Include="Gherkin\Tree\TypeGuesser.cs" />
     <Compile Include="Guids.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>

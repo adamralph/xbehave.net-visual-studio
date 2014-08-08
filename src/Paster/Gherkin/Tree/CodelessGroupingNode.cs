@@ -10,12 +10,22 @@ namespace xBehave.Paster.Gherkin
         public void Append(StringBuilder sb)
         {
             foreach (var node in _nodes)
-                node.Append(sb);
+                node.Append(sb, new string[] {});
         }
 
         public void AddNode(Instruction node)
         {
             _nodes.Add(node);
+        }
+
+        public void AddExample(string[] exampleNames)
+        {
+            //examples only affects code output.
+        }
+
+        public void AddData(string[] variableValues)
+        {
+            //data only effects code output.
         }
     }
 }

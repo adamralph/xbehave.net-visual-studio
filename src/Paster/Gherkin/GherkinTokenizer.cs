@@ -35,11 +35,14 @@ namespace xBehave.Paster.Gherkin
                 return LineType.Then;
             if (line.StartsWith("and", StringComparison.InvariantCultureIgnoreCase))
                 return LineType.And;
-            if (line.StartsWith("scenario", StringComparison.InvariantCultureIgnoreCase))
-                return LineType.Scenario;
             if (line.StartsWith("scenario outline", StringComparison.InvariantCultureIgnoreCase))
                 return LineType.ScenarioOutline;
-
+            if (line.StartsWith("scenario", StringComparison.InvariantCultureIgnoreCase))
+                return LineType.Scenario;
+            if (line.StartsWith("example", StringComparison.InvariantCultureIgnoreCase))
+                return LineType.Example;
+            if (line.StartsWith("|", StringComparison.InvariantCultureIgnoreCase))
+                return LineType.Data;
             return LineType.NOP;
         }
     }

@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace xBehave.Paster.Gherkin
 {
-    internal class ScenarioOutlineState : ScenarioState, CanAddExample, CanAddData
+    internal class ScenarioOutlineState : ScenarioState, CanAddData, CanAddExample
     {
         public ScenarioOutlineState(SyntaxTree tree, Scenario @group) : base(tree, @group)
         {}
@@ -17,12 +19,52 @@ namespace xBehave.Paster.Gherkin
 
         public TreeState AddExample(string rawline)
         {
-            throw new NotImplementedException();
+            var variableNames = rawline.RemoveExampleTag()
+                                       .Split(new[] {'|'}, StringSplitOptions.None)
+                                       .Skip(1)
+                                       .DropLast()
+                                       .Select(n => n.Trim())
+                                       .ToArray();
+            _group.AddExample(variableNames);
+            return this;
         }
 
         public TreeState AddData(string rawline)
         {
-            throw new NotImplementedException();
+            var variableValues = rawline.Trim()
+                                        .Split(new[] {'|'}, StringSplitOptions.None)
+                                        .Skip(1)
+                                        .DropLast()
+                                        .Select(n => n.Trim())
+                                        .ToArray();
+            _group.AddData(variableValues);
+            return this;
+        }
+    }
+
+    public static class EnumerableExtension
+    {
+        public static IEnumerable<T> DropLast<T>(this IEnumerable<T> source)
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
+
+            return InternalDropLast(source);
+        }
+
+        private static IEnumerable<T> InternalDropLast<T>(IEnumerable<T> source)
+        {
+            T buffer = default(T);
+            bool buffered = false;
+
+            foreach (var x in source)
+            {
+                if (buffered)
+                    yield return buffer;
+
+                buffer = x;
+                buffered = true;
+            }
         }
     }
 }

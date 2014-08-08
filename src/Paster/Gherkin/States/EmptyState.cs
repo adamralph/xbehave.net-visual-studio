@@ -2,7 +2,7 @@ using System;
 
 namespace xBehave.Paster.Gherkin
 {
-    internal class EmptyState : TreeState, CanAddInstruction, CanAddScenario
+    internal class EmptyState : TreeState, CanAddInstruction, CanAddScenario, CanAddScenarioOutline
     {
         public EmptyState()
         {
@@ -31,6 +31,13 @@ namespace xBehave.Paster.Gherkin
             var group = new Scenario(rawLine.RemoveScenarioTag());
             Tree.Add(group);
             return new ScenarioState(Tree, group);
+        }
+
+        public TreeState AddScenarioOutline(string rawLine)
+        {
+            var group = new Scenario(rawLine.RemoveScenarioOutlineTag());
+            Tree.Add(group);
+            return new ScenarioOutlineState(Tree, group); 
         }
     }
 }

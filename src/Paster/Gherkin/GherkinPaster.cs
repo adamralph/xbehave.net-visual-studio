@@ -19,11 +19,10 @@ namespace xBehave.Paster.Gherkin
                 return;
 
             TreeState currentState = new EmptyState();
-
-            currentState = source.GetText()
-                                 .Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
-                                 .CreateTokens()
-                                 .Aggregate(currentState, (current, line) => StateTransitions.Transition[line.Type](current, line.RawLine));
+            var tokens = source.GetText()
+                               .Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+                               .CreateTokens().ToList();
+            currentState = tokens.Aggregate(currentState, (current, line) => StateTransitions.Transition[line.Type](current, line.RawLine));
 
             _environment.Paste(currentState.ToString());
         }

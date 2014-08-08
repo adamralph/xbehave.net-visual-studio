@@ -4,20 +4,6 @@ using System.Linq;
 
 namespace xBehave.Paster.Gherkin
 {
-    internal static class GherkinTokenExtensions
-    {
-        internal static IEnumerable<GherkinToken> MergeMultiLineTokens(this IEnumerable<GherkinToken> tokens)
-        {
-            foreach (var token in tokens)
-            {
-                if (token.Type != LineType.Example)
-                {
-                    yield return token;                    
-                }
-            }
-        }
-    }
-
     internal static class RawLineManipulations
     {
         internal static string EscapeDoubleQuotes(this string rawLine)
@@ -29,6 +15,18 @@ namespace xBehave.Paster.Gherkin
         {
             var index = rawLine.IndexOf("scenario:", StringComparison.OrdinalIgnoreCase);
             return rawLine.Substring(index + 9);
+        }
+
+        internal static string RemoveScenarioOutlineTag(this string rawLine)
+        {
+            var index = rawLine.IndexOf("scenario outline:", StringComparison.OrdinalIgnoreCase);
+            return rawLine.Substring(index + 17);
+        }
+
+        internal static string RemoveExampleTag(this string rawline)
+        {
+            var index = rawline.IndexOf("examples:", StringComparison.OrdinalIgnoreCase);
+            return rawline.Substring(index + 9);
         }
 
         internal static string RemoveQuotes(this string rawLine)

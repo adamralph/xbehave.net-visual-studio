@@ -17,6 +17,14 @@ namespace xBehave.Paster.Gherkin
                                          outline => outline.AddScenario(rawLine))
                     },
                     {
+                        LineType.ScenarioOutline,
+                        (state, rawline) =>
+                        state.Transition(empty => empty.AddScenarioOutline(rawline),
+                                         scenario => scenario.AddScenarioOutline(rawline),
+                                         implied => implied,
+                                         outline => outline.AddScenarioOutline(rawline))
+                    },
+                    {
                         LineType.Given,
                         (state, rawline) =>
                         state.Transition(empty => empty.AddInstruction(rawline, LineType.Given),
@@ -47,6 +55,16 @@ namespace xBehave.Paster.Gherkin
                                          scenario => scenario.AddInstruction(rawline, LineType.And),
                                          implied => implied.AddInstruction(rawline, LineType.And),
                                          outline => outline.AddInstruction(rawline, LineType.And))
+                    },
+                    {
+                        LineType.Example,
+                        (state, rawline) =>
+                        state.Transition(empty => empty, scenario => scenario, implied => implied, outline => outline.AddExample(rawline))
+                    },
+                    {
+                        LineType.Data,
+                        (state, rawline) =>
+                        state.Transition(empty => empty, scenario => scenario, implied => implied, outline => outline.AddData(rawline))
                     },
                     {
                         LineType.NOP,
