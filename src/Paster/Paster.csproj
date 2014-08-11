@@ -125,6 +125,8 @@
     <Compile Include="Gherkin\Commands\CanAddExample.cs" />
     <Compile Include="Gherkin\Commands\CanAddScenarioOutline.cs" />
     <Compile Include="Gherkin\Data\ExampleValue.cs" />
+    <Compile Include="Gherkin\Data\PlaceHolderCollection.cs" />
+    <Compile Include="Gherkin\Data\ValueTypes.cs" />
     <Compile Include="Gherkin\GherkinPaster.cs" />
     <Compile Include="Gherkin\Data\Instruction.cs" />
     <Compile Include="Gherkin\GherkinToken.cs" />

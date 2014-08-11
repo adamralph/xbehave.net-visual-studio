@@ -13,6 +13,6 @@ namespace xBehave.Paster.Gherkin
 
         public int Index { get; private set; }
         public string Value { get; private set; }
-        public string ValueType { get; private set; }
+        public ValueTypes ValueType { get; private set; }
     }
 }

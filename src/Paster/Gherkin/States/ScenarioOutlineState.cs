@@ -25,7 +25,7 @@ namespace xBehave.Paster.Gherkin
                                        .DropLast()
                                        .Select(n => n.Trim())
                                        .ToArray();
-            _group.AddExample(variableNames);
+            Group.AddExample(variableNames);
             return this;
         }
 
@@ -37,7 +37,7 @@ namespace xBehave.Paster.Gherkin
                                         .DropLast()
                                         .Select(n => n.Trim())
                                         .ToArray();
-            _group.AddData(variableValues);
+            Group.AddData(variableValues);
             return this;
         }
     }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.VisualStudio.OLE.Interop;
 
 namespace xBehave.Paster.Gherkin
 {
@@ -11,6 +12,8 @@ namespace xBehave.Paster.Gherkin
         private readonly List<SyntaxNode> _lines = new List<SyntaxNode>();
         private string[] _parameterNames = {};
         private readonly List<ExampleValue[]> _examples = new List<ExampleValue[]>();
+
+        private PlaceHolderCollection placeholders;
 
         public Scenario(string rawLine)
         {
@@ -23,6 +26,8 @@ namespace xBehave.Paster.Gherkin
             sb.AppendLine("[Scenario]");
             if (_parameterNames.Any() && _examples.Any())
             {
+                var exampleAttributes = placeholders.CreateExampleAttributes();
+
                 foreach (var exampleValuese in _examples)
                 {
                     string valueString = String.Join(",", exampleValuese.Select(ev => ev.Value));
@@ -47,15 +52,14 @@ namespace xBehave.Paster.Gherkin
 
         public void AddExample(string[] exampleNames)
         {
-            _parameterNames = exampleNames;
+            placeholders = new PlaceHolderCollection(exampleNames);
         }
 
         public void AddData(string[] variableValues)
         {
             var examples = variableValues.Select((v, index) => new ExampleValue(index, v))
                                          .ToArray();
-
-            _examples.Add(examples);
+            placeholders.AddValues(examples);
         }
     }
 }
