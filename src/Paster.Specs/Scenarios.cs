@@ -55,7 +55,7 @@ namespace Paster.Specs
 
 
         [Scenario(DisplayName = "Multiple scenarios")]
-        public void multiplescenarios(EnvironmentClipboard clipboard, GherkinPaster sut, TestEnvironment environment)
+        public void Multiplescenarios(EnvironmentClipboard clipboard, GherkinPaster sut, TestEnvironment environment)
         {
             "given a complete system"
                 .Given(() =>
