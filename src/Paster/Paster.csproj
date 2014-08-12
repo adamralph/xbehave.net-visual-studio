@@ -121,21 +121,34 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gherkin\Commands\CanAddData.cs" />
+    <Compile Include="Gherkin\Commands\CanAddExample.cs" />
+    <Compile Include="Gherkin\Commands\CanAddScenarioOutline.cs" />
+    <Compile Include="Gherkin\Data\ExampleValue.cs" />
+    <Compile Include="Gherkin\Data\PlaceHolderCollection.cs" />
+    <Compile Include="Gherkin\Data\Substitution.cs" />
+    <Compile Include="Gherkin\Data\ValueTypes.cs" />
     <Compile Include="Gherkin\GherkinPaster.cs" />
     <Compile Include="Gherkin\Data\Instruction.cs" />
+    <Compile Include="Gherkin\GherkinToken.cs" />
+    <Compile Include="Gherkin\GherkinTokenizer.cs" />
     <Compile Include="Gherkin\LineType.cs" />
     <Compile Include="Gherkin\RawLineManipulations.cs" />
     <Compile Include="Gherkin\Data\Scenario.cs" />
     <Compile Include="Gherkin\Commands\CanAddInstruction.cs" />
     <Compile Include="Gherkin\Commands\CanAddScenario.cs" />
+    <Compile Include="Gherkin\States\EnumerableExtension.cs" />
+    <Compile Include="Gherkin\States\ScenarioOutlineState.cs" />
+    <Compile Include="Gherkin\StateTransitions.cs" />
     <Compile Include="Gherkin\Tree\CodelessGroupingNode.cs" />
     <Compile Include="Gherkin\States\EmptyState.cs" />
-    <Compile Include="Gherkin\States\ExistingScenarioState.cs" />
+    <Compile Include="Gherkin\States\ImpliedScenarioState.cs" />
     <Compile Include="Gherkin\States\ScenarioState.cs" />
     <Compile Include="Gherkin\Tree\SyntaxGroupingNode.cs" />
     <Compile Include="Gherkin\Tree\SyntaxNode.cs" />
     <Compile Include="Gherkin\Tree\SyntaxTree.cs" />
-    <Compile Include="Gherkin\Tree\TreeState.cs" />
+    <Compile Include="Gherkin\States\TreeState.cs" />
+    <Compile Include="Gherkin\Tree\TypeGuesser.cs" />
     <Compile Include="Guids.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -150,6 +163,7 @@
     <Compile Include="System\EnvironmentShim.cs" />
     <Compile Include="System\EnvironmentClipboard.cs" />
     <Compile Include="System\DevelopmentEnvironment.cs" />
+    <Compile Include="System\StringBuilderExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">

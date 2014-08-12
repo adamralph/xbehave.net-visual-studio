@@ -7,6 +7,9 @@ namespace xBehave.Paster.Gherkin
         Then,
         And,
         NOP,
-        Scenario
+        Scenario,
+        Example,
+        ScenarioOutline,
+        Data
     }
 }

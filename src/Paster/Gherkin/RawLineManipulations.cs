@@ -17,6 +17,18 @@ namespace xBehave.Paster.Gherkin
             return rawLine.Substring(index + 9);
         }
 
+        internal static string RemoveScenarioOutlineTag(this string rawLine)
+        {
+            var index = rawLine.IndexOf("scenario outline:", StringComparison.OrdinalIgnoreCase);
+            return rawLine.Substring(index + 17);
+        }
+
+        internal static string RemoveExampleTag(this string rawline)
+        {
+            var index = rawline.IndexOf("examples:", StringComparison.OrdinalIgnoreCase);
+            return rawline.Substring(index + 9);
+        }
+
         internal static string RemoveQuotes(this string rawLine)
         {
             return rawLine.Replace(@"""", "");

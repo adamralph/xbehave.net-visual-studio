@@ -1,6 +1,6 @@
 using System;
+using System.Linq;
 using System.Text;
-using xBehave.Paster.System;
 
 namespace xBehave.Paster.Gherkin
 {
@@ -15,9 +15,11 @@ namespace xBehave.Paster.Gherkin
             _instructionType = instructionType;
         }
 
-        public void Append(StringBuilder sb)
+        public void Append(StringBuilder sb, Substitution[] substitutions)
         {
-            sb.AppendFormat(@"""{0}"".{1}(() => {{}});{2}", _textLine, _instructionType, Environment.NewLine);
+            var data = substitutions.Aggregate(_textLine, (current, pair) => current.Replace(pair.PlaceHolder, pair.NewValue));
+
+            sb.AppendFormat(@"""{0}"".{1}(() => {{}});{2}", data, _instructionType, Environment.NewLine);
         }
     }
 }

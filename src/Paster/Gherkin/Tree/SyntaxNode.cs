@@ -4,6 +4,6 @@ namespace xBehave.Paster.Gherkin
 {
     internal interface SyntaxNode
     {
-        void Append(StringBuilder sb);
+        void Append(StringBuilder sb, Substitution[] substitutions);
     }
 }
