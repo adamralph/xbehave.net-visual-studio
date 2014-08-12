@@ -11,7 +11,7 @@ namespace Paster.Specs
     [Trait("Scenarios","")]
     public class Scenarios
     {
-        [Scenario(DisplayName = "Expected default use case")]
+        [Scenario(DisplayName = "Simple scenario with all four instruction types")]
         public void DefaultUseCase(EnvironmentClipboard clipboard, GherkinPaster sut, TestEnvironment environment)
         {
             "Given a complete system"

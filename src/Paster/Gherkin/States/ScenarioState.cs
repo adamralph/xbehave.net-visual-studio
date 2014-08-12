@@ -42,7 +42,7 @@ namespace xBehave.Paster.Gherkin
         public TreeState AddScenarioOutline(string rawLine)
         {
             var text = rawLine.Trim()
-                              .RemoveScenarioTag();
+                              .RemoveScenarioOutlineTag();
             Group = new Scenario(text);
 
             Tree.Add(Group);

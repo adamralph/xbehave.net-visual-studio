@@ -141,6 +141,7 @@
     <Compile Include="Fakes\TestEnvironment.cs" />
     <Compile Include="HandlingNOPLines.cs" />
     <Compile Include="MakeGalioWork.cs" />
+    <Compile Include="MultipleScenarioOutlines.cs" />
     <Compile Include="ScenarioOutlines.cs" />
     <Compile Include="Scenarios.cs" />
     <Compile Include="SimplePasting.cs" />
