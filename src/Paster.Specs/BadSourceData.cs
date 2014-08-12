@@ -20,12 +20,19 @@ namespace Paster.Specs
                 environment = FakesLibrary.CreateDefaultEnvironment();
                 sut = new GherkinPaster(environment);
             });
-            "and a empty string ".And(() => clipboard = FakesLibrary.CreateShim(String.Empty));
-            "When the text is pasted".Then(() => sut.PasteGherkin(clipboard));
-            "Then no lines are received by the environment".Then(() => environment.LinesWritten.Count()
-                                                                                  .Should()
-                                                                                  .Be(0));
+
+            "and a empty string "
+                .And(() => clipboard = FakesLibrary.CreateShim(String.Empty));
+
+            "When the text is pasted"
+                .Then(() => sut.PasteGherkin(clipboard));
+
+            "Then no lines are received by the environment"
+                .Then(() => environment.LinesWritten.Count()
+                                       .Should()
+                                       .Be(0));
         }
+
         [Scenario(DisplayName = "Pasting invalid gherkin")]
         public void InvalidGherkin(EnvironmentClipboard clipboard, GherkinPaster sut, TestEnvironment environment)
         {
@@ -34,11 +41,17 @@ namespace Paster.Specs
                 environment = FakesLibrary.CreateDefaultEnvironment();
                 sut = new GherkinPaster(environment);
             });
-            "and an invalid string of gherkin".And(() => clipboard = FakesLibrary.CreateShim("This is not valid gherkin"));
-            "When the text is pasted".Then(() => sut.PasteGherkin(clipboard));
-            "Then no lines are received by the environment".Then(() => environment.LinesWritten.Count()
-                                                                                  .Should()
-                                                                                  .Be(0));
+
+            "and an invalid string of gherkin"
+                .And(() => clipboard = FakesLibrary.CreateShim("This is not valid gherkin"));
+
+            "When the text is pasted"
+                .Then(() => sut.PasteGherkin(clipboard));
+
+            "Then no lines are received by the environment"
+                .Then(() => environment.LinesWritten.Count()
+                                       .Should()
+                                       .Be(0));
         }
     }
 }

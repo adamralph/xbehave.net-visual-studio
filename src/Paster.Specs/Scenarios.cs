@@ -14,93 +14,101 @@ namespace Paster.Specs
         [Scenario(DisplayName = "Expected default use case")]
         public void DefaultUseCase(EnvironmentClipboard clipboard, GherkinPaster sut, TestEnvironment environment)
         {
-            "Given a complete system".Given(() =>
-            {
-                environment = FakesLibrary.CreateDefaultEnvironment();
-                sut = new GherkinPaster(environment);
-            });
+            "Given a complete system"
+                .Given(() =>
+                           {
+                               environment = FakesLibrary.CreateDefaultEnvironment();
+                               sut = new GherkinPaster(environment);
+                           });
 
-            "And a gherkin Scenario".And(() =>
-            {
-                var sb = new StringBuilder();
-                sb.AppendLine("Scenario: Testing the gherkin paster");
-                sb.AppendLine("Given a line");
-                sb.AppendLine("And a line");
-                sb.AppendLine("When a line");
-                sb.AppendLine("Then a line");
-                clipboard = FakesLibrary.CreateShim(sb.ToString());
-            });
+            "And a gherkin Scenario"
+                .And(() =>
+                         {
+                             var sb = new StringBuilder();
+                             sb.AppendLine("Scenario: Testing the gherkin paster");
+                             sb.AppendLine("Given a line");
+                             sb.AppendLine("And a line");
+                             sb.AppendLine("When a line");
+                             sb.AppendLine("Then a line");
+                             clipboard = FakesLibrary.CreateShim(sb.ToString());
+                         });
 
-            "When the gherkin is pasted".When(() => sut.PasteGherkin(clipboard));
+            "When the gherkin is pasted"
+                .When(() => sut.PasteGherkin(clipboard));
 
-            "Then the output should be a method wrapping 4 strings with appropriate extension methods".Then(
-                () => { var expectedOutput = @"[Scenario]
-public void TestingTheGherkinPaster()
-{
-""Given a line"".Given(() => {});
-""And a line"".And(() => {});
-""When a line"".When(() => {});
-""Then a line"".Then(() => {});
-}
-";
-                          environment.TextWritten.Should()
-                                     .Be(expectedOutput);
-                });
+            "Then the output should be a method wrapping 4 strings with appropriate extension methods"
+                .Then(() =>
+                          {
+                              var sb = new StringBuilder();
+                              sb.AppendLine("[Scenario]");
+                              sb.AppendLine("public void TestingTheGherkinPaster()");
+                              sb.AppendLine("{");
+                              sb.AppendLine("\"Given a line\".Given(() => {});");
+                              sb.AppendLine("\"And a line\".And(() => {});");
+                              sb.AppendLine("\"When a line\".And(() => {});");
+                              sb.AppendLine("\"Then a line\".And(() => {});");
+                              sb.AppendLine("}");
+                              environment.TextWritten.Should()
+                                         .Be(sb.ToString());
+                          });
         }
 
 
         [Scenario(DisplayName = "Multiple scenarios")]
         public void multiplescenarios(EnvironmentClipboard clipboard, GherkinPaster sut, TestEnvironment environment)
         {
-            "given a complete system".Given(() =>
-            {
-                environment = FakesLibrary.CreateDefaultEnvironment();
-                sut = new GherkinPaster(environment);
-            });
+            "given a complete system"
+                .Given(() =>
+                           {
+                               environment = FakesLibrary.CreateDefaultEnvironment();
+                               sut = new GherkinPaster(environment);
+                           });
 
-            "And a gherkin Scenario".And(() =>
-            {
-                var sb = new StringBuilder();
-                sb.AppendLine("Scenario: Testing the gherkin paster");
-                sb.AppendLine("Given a line");
-                sb.AppendLine("And a line");
-                sb.AppendLine("When a line");
-                sb.AppendLine("Then a line");
-                sb.AppendLine();
-                sb.AppendLine("Scenario: Testing the gherkin paster again");
-                sb.AppendLine("Given a line");
-                sb.AppendLine("And a line");
-                sb.AppendLine("When a line");
-                sb.AppendLine("Then a line");
-                clipboard = FakesLibrary.CreateShim(sb.ToString());
-            });
+            "And a gherkin Scenario"
+                .And(() =>
+                         {
+                             var sb = new StringBuilder();
+                             sb.AppendLine("Scenario: Testing the gherkin paster");
+                             sb.AppendLine("Given a line");
+                             sb.AppendLine("And a line");
+                             sb.AppendLine("When a line");
+                             sb.AppendLine("Then a line");
+                             sb.AppendLine();
+                             sb.AppendLine("Scenario: Testing the gherkin paster again");
+                             sb.AppendLine("Given a line");
+                             sb.AppendLine("And a line");
+                             sb.AppendLine("When a line");
+                             sb.AppendLine("Then a line");
+                             clipboard = FakesLibrary.CreateShim(sb.ToString());
+                         });
 
-            "When the gherkin is pasted".When(() => sut.PasteGherkin(clipboard));
+            "When the gherkin is pasted"
+                .When(() => sut.PasteGherkin(clipboard));
 
-            "Then the output should be a method wrapping 4 strings with appropriate extension methods".Then(
-                () =>
-                {
-                    var expectedOutput = @"[Scenario]
-public void TestingTheGherkinPaster()
-{
-""Given a line"".Given(() => {});
-""And a line"".And(() => {});
-""When a line"".When(() => {});
-""Then a line"".Then(() => {});
-}
-
-[Scenario]
-public void TestingTheGherkinPasterAgain()
-{
-""Given a line"".Given(() => {});
-""And a line"".And(() => {});
-""When a line"".When(() => {});
-""Then a line"".Then(() => {});
-}
-";
-                    environment.TextWritten.Should()
-                               .Be(expectedOutput);
-                });
+            "Then the output should be a method wrapping 4 strings with appropriate extension methods"
+                .Then(() =>
+                          {
+                              var sb = new StringBuilder();
+                              sb.AppendLine("[Scenario]");
+                              sb.AppendLine("public void TestingTheGherkinPaster()");
+                              sb.AppendLine("{");
+                              sb.AppendLine("\"Given a line\".Given(() => {});");
+                              sb.AppendLine("\"And a line\".And(() => {});");
+                              sb.AppendLine("\"When a line\".And(() => {});");
+                              sb.AppendLine("\"Then a line\".And(() => {});");
+                              sb.AppendLine("}");
+                              sb.AppendLine();
+                              sb.AppendLine("[Scenario]");
+                              sb.AppendLine("public void TestingTheGherkinPasterAgain()");
+                              sb.AppendLine("{");
+                              sb.AppendLine("\"Given a line\".Given(() => {});");
+                              sb.AppendLine("\"And a line\".And(() => {});");
+                              sb.AppendLine("\"When a line\".And(() => {});");
+                              sb.AppendLine("\"Then a line\".And(() => {});");
+                              sb.AppendLine("}");
+                              environment.TextWritten.Should()
+                                         .Be(sb.ToString());
+                          });
         }
     }
 }
