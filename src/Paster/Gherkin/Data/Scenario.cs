@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.VisualStudio.OLE.Interop;
+using xBehave.Paster.System;
 
 namespace xBehave.Paster.Gherkin
 {
@@ -10,10 +10,8 @@ namespace xBehave.Paster.Gherkin
     {
         private readonly string _methodName;
         private readonly List<SyntaxNode> _lines = new List<SyntaxNode>();
-        private string[] _parameterNames = {};
-        private readonly List<ExampleValue[]> _examples = new List<ExampleValue[]>();
 
-        private PlaceHolderCollection placeholders;
+        private PlaceHolderCollection _placeholders = PlaceHolderCollection.Empty;
 
         public Scenario(string rawLine)
         {
@@ -24,23 +22,20 @@ namespace xBehave.Paster.Gherkin
         public void Append(StringBuilder sb)
         {
             sb.AppendLine("[Scenario]");
-            if (_parameterNames.Any() && _examples.Any())
+            if (_placeholders.Any())
             {
-                var exampleAttributes = placeholders.CreateExampleAttributes();
+                var exampleAttributes = _placeholders.CreateExampleAttributes();
+                sb.AppendLines(exampleAttributes);
 
-                foreach (var exampleValuese in _examples)
-                {
-                    string valueString = String.Join(",", exampleValuese.Select(ev => ev.Value));
-                    sb.AppendLine(string.Format("[Example({0})]", valueString));
-                }
-                var paramList = _parameterNames.Select((name, index) => _examples[0][index].ValueType + " " + name);
+                var paramList = _placeholders.CreateParameters();
                 sb.AppendFormat(@"public void {0}({2}){1}{{{1}", _methodName, Environment.NewLine, String.Join(", ", paramList));
             }
             else
                 sb.AppendFormat(@"public void {0}(){1}{{{1}", _methodName, Environment.NewLine);
 
+            var substitutions = _placeholders.CreateSubstitutions();
             foreach (var appender in _lines)
-                appender.Append(sb, _parameterNames);
+                appender.Append(sb, substitutions);
 
             sb.AppendLine("}");
         }
@@ -52,14 +47,14 @@ namespace xBehave.Paster.Gherkin
 
         public void AddExample(string[] exampleNames)
         {
-            placeholders = new PlaceHolderCollection(exampleNames);
+            _placeholders = new PlaceHolderCollection(exampleNames);
         }
 
         public void AddData(string[] variableValues)
         {
             var examples = variableValues.Select((v, index) => new ExampleValue(index, v))
                                          .ToArray();
-            placeholders.AddValues(examples);
+            _placeholders.AddValues(examples);
         }
     }
 }

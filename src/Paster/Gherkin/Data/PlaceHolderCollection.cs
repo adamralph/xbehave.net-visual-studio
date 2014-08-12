@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace xBehave.Paster.Gherkin
 {
@@ -45,6 +48,17 @@ namespace xBehave.Paster.Gherkin
                 _placeholders.Add(new PlaceHolder(name));
         }
 
+        protected PlaceHolderCollection()
+        {}
+
+        public static PlaceHolderCollection Empty
+        {
+            get
+            {
+                return new PlaceHolderCollection();
+            }
+        }
+
         public void AddValues(ExampleValue[] examples)
         {
             for (int index = 0; index < _placeholders.Count; index++)
@@ -56,8 +70,44 @@ namespace xBehave.Paster.Gherkin
             var numberOfAttributes = _placeholders[0].Values.Count;
             for (int index = 0; index < numberOfAttributes; index++)
             {
-                
+                var currentIndex = index;
+                var valueString = String.Join(",", _placeholders.Select(p =>
+                                                                            {
+                                                                                if (p.Type == ValueTypes.String)
+                                                                                {
+                                                                                    return String.Format("\"{0}\"", p.Values[currentIndex]);
+                                                                                }
+                                                                                return p.Values[currentIndex];
+                                                                            }));
+                yield return String.Format("[Example({0})]", valueString);
             }
+        }
+
+        public bool Any()
+        {
+            return _placeholders.Any();
+        }
+
+        public IEnumerable<string> CreateParameters()
+        {
+            return _placeholders.Select(placeholder => String.Format("{0} {1}",
+                                                                     placeholder.Type.ToString()
+                                                                                .ToLower(CultureInfo.CurrentUICulture),
+                                                                     placeholder.Name));
+        }
+
+        private const string PlaceHolderFormat = @"<{0}>";
+        private const string SubstituionFormat = @"{{{0}}}";
+
+        public Substitution[] CreateSubstitutions()
+        {
+            return _placeholders.Select((placeholder, index) =>
+                                            {
+                                                var name = String.Format(PlaceHolderFormat, placeholder.Name);
+                                                var sub = String.Format(SubstituionFormat, index.ToString(CultureInfo.CurrentUICulture));
+                                                return new Substitution(name, sub);
+                                            })
+                                .ToArray();
         }
     }
 }

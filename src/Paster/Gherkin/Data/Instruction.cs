@@ -15,13 +15,9 @@ namespace xBehave.Paster.Gherkin
             _instructionType = instructionType;
         }
 
-        public void Append(StringBuilder sb, string[] substitutions)
+        public void Append(StringBuilder sb, Substitution[] substitutions)
         {
-            var subPairs =
-                substitutions.Select(
-                                     (value, index) =>
-                                     new Tuple<string, string>(String.Format("<{0}>", value), String.Format("{{{0}}}", index)));
-            var data = subPairs.Aggregate(_textLine, (current, pair) => current.Replace(pair.Item1, pair.Item2));
+            var data = substitutions.Aggregate(_textLine, (current, pair) => current.Replace(pair.PlaceHolder, pair.NewValue));
 
             sb.AppendFormat(@"""{0}"".{1}(() => {{}});{2}", data, _instructionType, Environment.NewLine);
         }
