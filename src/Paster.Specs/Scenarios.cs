@@ -110,5 +110,36 @@ namespace Paster.Specs
                                          .Be(sb.ToString());
                           });
         }
+
+        [Trait("Unhappy Path", "")]
+        [Scenario(DisplayName = "Can't add a scenario after grouping less gherkin")]
+        public void CantAddScenario(EnvironmentClipboard clipboard, GherkinPaster sut, TestEnvironment environment)
+        {
+            "Given a complete system"
+                .Given(() =>
+                           {
+                               environment = new TestEnvironment();
+                               sut = new GherkinPaster(environment);
+                           });
+
+            "And a gherkin snippet of an instruction followed by a scenario"
+                .And(() =>
+                         {
+                             var sb = new StringBuilder();
+                             sb.AppendLine("Then an erroroneous line was copied");
+                             sb.AppendLine();
+                             sb.AppendLine("Scenario: Oh dear");
+
+                             clipboard = new ClipboardShim(sb.ToString());
+                         });
+
+
+            "When the gherkin is pasted"
+                .When(() => sut.PasteGherkin(clipboard));
+
+            "Then there should be a comment saying the paste failed"
+                .Then(() => environment.LinesWritten[1].Should()
+                                                       .Be("//Error when pasting: Scenario: Oh dear"));
+        }
     }
 }

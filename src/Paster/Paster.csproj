@@ -137,7 +137,8 @@
     <Compile Include="Gherkin\Data\Scenario.cs" />
     <Compile Include="Gherkin\Commands\CanAddInstruction.cs" />
     <Compile Include="Gherkin\Commands\CanAddScenario.cs" />
-    <Compile Include="Gherkin\States\EnumerableExtension.cs" />
+    <Compile Include="Gherkin\Data\EnumerableExtension.cs" />
+    <Compile Include="Gherkin\States\ErrorState.cs" />
     <Compile Include="Gherkin\States\ScenarioOutlineState.cs" />
     <Compile Include="Gherkin\StateTransitions.cs" />
     <Compile Include="Gherkin\Tree\CodelessGroupingNode.cs" />

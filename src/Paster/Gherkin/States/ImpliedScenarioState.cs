@@ -15,7 +15,8 @@ namespace xBehave.Paster.Gherkin
         public override TreeState Transition(Func<EmptyState, TreeState> stateEmpty,
                                              Func<ScenarioState, TreeState> stateScenario,
                                              Func<ImpliedScenarioState, TreeState> stateImpliedScenario,
-                                             Func<ScenarioOutlineState, TreeState> stateScenarioOutline)
+                                             Func<ScenarioOutlineState, TreeState> stateScenarioOutline,
+                                             Func<ErrorState, TreeState> stateError)
         {
             return stateImpliedScenario(this);
         }
@@ -26,6 +27,11 @@ namespace xBehave.Paster.Gherkin
             _group.AddNode(node);
 
             return this;
+        }
+
+        public override TreeState AddError(LineType lineType, string rawline)
+        {
+            return ErrorState.Create(Tree, "Can't be processed if the previous lines weren't part of a scenario", lineType, rawline);
         }
     }
 }
