@@ -46,7 +46,9 @@ namespace xBehave.Paster.Gherkin
                     methodNameChars.Add(Char.ToUpper(chars[index]));
                 }
                 else
+                {
                     methodNameChars.Add(chars[index]);
+                }
             }
 
             return new string(methodNameChars.ToArray());
