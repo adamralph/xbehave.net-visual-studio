@@ -11,7 +11,7 @@ namespace Paster.Specs
     [Trait("Scenarios","")]
     public class Scenarios
     {
-        [Scenario(DisplayName = "Expected default use case")]
+        [Scenario(DisplayName = "Simple scenario with all four instruction types")]
         public void DefaultUseCase(EnvironmentClipboard clipboard, GherkinPaster sut, TestEnvironment environment)
         {
             "Given a complete system"
@@ -55,7 +55,7 @@ namespace Paster.Specs
 
 
         [Scenario(DisplayName = "Multiple scenarios")]
-        public void multiplescenarios(EnvironmentClipboard clipboard, GherkinPaster sut, TestEnvironment environment)
+        public void Multiplescenarios(EnvironmentClipboard clipboard, GherkinPaster sut, TestEnvironment environment)
         {
             "given a complete system"
                 .Given(() =>
@@ -109,6 +109,37 @@ namespace Paster.Specs
                               environment.TextWritten.Should()
                                          .Be(sb.ToString());
                           });
+        }
+
+        [Trait("Unhappy Path", "")]
+        [Scenario(DisplayName = "Can't add a scenario after grouping less gherkin")]
+        public void CantAddScenario(EnvironmentClipboard clipboard, GherkinPaster sut, TestEnvironment environment)
+        {
+            "Given a complete system"
+                .Given(() =>
+                           {
+                               environment = new TestEnvironment();
+                               sut = new GherkinPaster(environment);
+                           });
+
+            "And a gherkin snippet of an instruction followed by a scenario"
+                .And(() =>
+                         {
+                             var sb = new StringBuilder();
+                             sb.AppendLine("Then an erroroneous line was copied");
+                             sb.AppendLine();
+                             sb.AppendLine("Scenario: Oh dear");
+
+                             clipboard = new ClipboardShim(sb.ToString());
+                         });
+
+
+            "When the gherkin is pasted"
+                .When(() => sut.PasteGherkin(clipboard));
+
+            "Then there should be a comment saying the paste failed"
+                .Then(() => environment.LinesWritten[1].Should()
+                                                       .Be("//Error when pasting: Scenario: Oh dear"));
         }
     }
 }

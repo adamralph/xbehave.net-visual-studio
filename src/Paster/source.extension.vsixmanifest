@@ -1,9 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="799565f1-457b-429a-8b06-39fb8de521fb" Version="1.0" Language="en-US" Publisher="Silicon Shark Ltd" />
-    <DisplayName>xBehave.Net Paster</DisplayName>
+    <Identity Id="799565f1-457b-429a-8b06-39fb8de521fb" Version="0.9" Language="en-US" Publisher="xBehave" />
+    <DisplayName>xBehave.Net Assistant</DisplayName>
     <Description>Takes a Gherkin scenario from the clipboard and pastes it as xBehave.Net code</Description>
+    <MoreInfo>http://xbehave.github.io/</MoreInfo>
+    <Icon>Resources\xbehave_32x32.ico</Icon>
+    <PreviewImage>Resources\xbehave_200x200.png</PreviewImage>
+    <Tags>xbehave tdd</Tags>
   </Metadata>
   <Installation InstalledByMsi="false">
     <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[12.0]" />

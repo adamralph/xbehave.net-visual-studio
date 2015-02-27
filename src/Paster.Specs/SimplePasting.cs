@@ -4,9 +4,11 @@ using Paster.Specs.Fakes;
 using Xbehave;
 using xBehave.Paster.Gherkin;
 using xBehave.Paster.System;
+using Xunit;
 
 namespace Paster.Specs
 {
+    [Trait("Without a scenario","")]
     public class SimplePasting
     {
         [Scenario(DisplayName = "Handle a single line of gherkin")]

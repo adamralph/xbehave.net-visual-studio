@@ -11,9 +11,15 @@ namespace xBehave.Paster.Gherkin
         public override TreeState Transition(Func<EmptyState, TreeState> stateEmpty,
                                              Func<ScenarioState, TreeState> stateScenario,
                                              Func<ImpliedScenarioState, TreeState> stateImpliedScenario,
-                                             Func<ScenarioOutlineState, TreeState> stateScenarioOutline)
+                                             Func<ScenarioOutlineState, TreeState> stateScenarioOutline,
+                                             Func<ErrorState, TreeState> stateError)
         {
             return stateScenarioOutline(this);
+        }
+
+        public override TreeState AddError(LineType lineType, string rawline)
+        {
+            throw new NotImplementedException();
         }
 
         public TreeState AddExample(string rawline)
