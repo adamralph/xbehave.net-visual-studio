@@ -62,13 +62,13 @@ namespace Paster.Specs
                 .Then(() =>
                           {
                               environment.LinesWritten[5].Should()
-                                                         .Be("\"Given there are {0} cucumbers\".Given(() => {});");
+                                                         .Be("\"Given there are {0} cucumbers\".f(() => {});");
                               environment.LinesWritten[6].Should()
-                                                         .Be("\"And I am feeling hungry for cucumbers\".And(() => {});");
+                                                         .Be("\"And I am feeling hungry for cucumbers\".f(() => {});");
                               environment.LinesWritten[7].Should()
-                                                         .Be("\"When I eat {1} cucumbers\".When(() => {});");
+                                                         .Be("\"When I eat {1} cucumbers\".f(() => {});");
                               environment.LinesWritten[8].Should()
-                                                         .Be("\"Then I should have {2} cucumbers\".Then(() => {});");
+                                                         .Be("\"Then I should have {2} cucumbers\".f(() => {});");
                           });
 
             "Then the environment receives a test method with examples"
@@ -81,10 +81,10 @@ namespace Paster.Specs
                               sb.AppendLine("[Example(\"Twenty\",5,15.0)]");
                               sb.AppendLine("public void Eating(string start, int eat, double left)");
                               sb.AppendLine("{");
-                              sb.AppendLine("\"Given there are {0} cucumbers\".Given(() => {});");
-                              sb.AppendLine("\"And I am feeling hungry for cucumbers\".And(() => {});");
-                              sb.AppendLine("\"When I eat {1} cucumbers\".When(() => {});");
-                              sb.AppendLine("\"Then I should have {2} cucumbers\".Then(() => {});");
+                              sb.AppendLine("\"Given there are {0} cucumbers\".f(() => {});");
+                              sb.AppendLine("\"And I am feeling hungry for cucumbers\".f(() => {});");
+                              sb.AppendLine("\"When I eat {1} cucumbers\".f(() => {});");
+                              sb.AppendLine("\"Then I should have {2} cucumbers\".f(() => {});");
                               sb.AppendLine("}");
 
                               environment.TextWritten.Should()

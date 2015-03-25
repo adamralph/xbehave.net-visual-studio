@@ -21,9 +21,9 @@ namespace xBehave.Paster.Gherkin
             return stateImpliedScenario(this);
         }
 
-        public TreeState AddInstruction(string rawLine, LineType rawType)
+        public TreeState AddInstruction(string rawLine)
         {
-            var node = new Instruction(rawLine, rawType);
+            var node = new Instruction(rawLine);
             _group.AddNode(node);
 
             return this;

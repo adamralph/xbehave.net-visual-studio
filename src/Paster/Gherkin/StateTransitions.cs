@@ -5,14 +5,6 @@ namespace xBehave.Paster.Gherkin
 {
     internal static class StateTransitions
     {
-        private static readonly Func<LineType, TreeState, string, TreeState> InstructionTransition =
-            (type, state, rawline) =>
-            state.Transition(empty => empty.AddInstruction(rawline, type),
-                             scenario => scenario.AddInstruction(rawline, type),
-                             implied => implied.AddInstruction(rawline, type),
-                             outline => outline.AddInstruction(rawline, type),
-                             error => error.AddError(LineType.Given, rawline));
-
         internal static IDictionary<LineType, Func<TreeState, string, TreeState>> Transition =
             new Dictionary<LineType, Func<TreeState, string, TreeState>>
                 {
@@ -34,10 +26,14 @@ namespace xBehave.Paster.Gherkin
                                          outline => outline.AddScenarioOutline(rawline),
                                          error => error.AddError(LineType.ScenarioOutline, rawline))
                     },
-                    {LineType.Given, (state, rawline) => InstructionTransition(LineType.Given, state, rawline)},
-                    {LineType.When, (state, rawline) => InstructionTransition(LineType.When, state, rawline)},
-                    {LineType.Then, (state, rawline) => InstructionTransition(LineType.Then, state, rawline)},
-                    {LineType.And, (state, rawline) => InstructionTransition(LineType.And, state, rawline)},
+                    {
+                        LineType.Instruction,
+                        (state, rawline) => state.Transition(empty => empty.AddInstruction(rawline),
+                                                             scenario => scenario.AddInstruction(rawline),
+                                                             implied => implied.AddInstruction(rawline),
+                                                             outline => outline.AddInstruction(rawline),
+                                                             error => error.AddError(LineType.Instruction, rawline))
+                    },
                     {
                         LineType.Example,
                         (state, rawline) =>
