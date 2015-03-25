@@ -43,10 +43,10 @@ namespace Paster.Specs
                               sb.AppendLine("[Scenario]");
                               sb.AppendLine("public void TestingTheGherkinPaster()");
                               sb.AppendLine("{");
-                              sb.AppendLine("\"Given a line\".Given(() => {});");
-                              sb.AppendLine("\"And a line\".And(() => {});");
-                              sb.AppendLine("\"When a line\".When(() => {});");
-                              sb.AppendLine("\"Then a line\".Then(() => {});");
+                              sb.AppendLine("\"Given a line\".f(() => {});");
+                              sb.AppendLine("\"And a line\".f(() => {});");
+                              sb.AppendLine("\"When a line\".f(() => {});");
+                              sb.AppendLine("\"Then a line\".f(() => {});");
                               sb.AppendLine("}");
                               environment.TextWritten.Should()
                                          .Be(sb.ToString());
@@ -92,19 +92,19 @@ namespace Paster.Specs
                               sb.AppendLine("[Scenario]");
                               sb.AppendLine("public void TestingTheGherkinPaster()");
                               sb.AppendLine("{");
-                              sb.AppendLine("\"Given a line\".Given(() => {});");
-                              sb.AppendLine("\"And a line\".And(() => {});");
-                              sb.AppendLine("\"When a line\".When(() => {});");
-                              sb.AppendLine("\"Then a line\".Then(() => {});");
+                              sb.AppendLine("\"Given a line\".f(() => {});");
+                              sb.AppendLine("\"And a line\".f(() => {});");
+                              sb.AppendLine("\"When a line\".f(() => {});");
+                              sb.AppendLine("\"Then a line\".f(() => {});");
                               sb.AppendLine("}");
                               sb.AppendLine();
                               sb.AppendLine("[Scenario]");
                               sb.AppendLine("public void TestingTheGherkinPasterAgain()");
                               sb.AppendLine("{");
-                              sb.AppendLine("\"Given a line\".Given(() => {});");
-                              sb.AppendLine("\"And a line\".And(() => {});");
-                              sb.AppendLine("\"When a line\".When(() => {});");
-                              sb.AppendLine("\"Then a line\".Then(() => {});");
+                              sb.AppendLine("\"Given a line\".f(() => {});");
+                              sb.AppendLine("\"And a line\".f(() => {});");
+                              sb.AppendLine("\"When a line\".f(() => {});");
+                              sb.AppendLine("\"Then a line\".f(() => {});");
                               sb.AppendLine("}");
                               environment.TextWritten.Should()
                                          .Be(sb.ToString());

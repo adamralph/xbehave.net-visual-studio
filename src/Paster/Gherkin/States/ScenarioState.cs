@@ -36,9 +36,9 @@ namespace xBehave.Paster.Gherkin
             return this;
         }
 
-        public TreeState AddInstruction(string rawLine, LineType rawType)
+        public TreeState AddInstruction(string rawLine)
         {
-            var node = new Instruction(rawLine, rawType);
+            var node = new Instruction(rawLine);
             Group.AddNode(node);
 
             return this;

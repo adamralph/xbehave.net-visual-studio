@@ -24,10 +24,10 @@ namespace xBehave.Paster.Gherkin
             return ErrorState.Create(Tree, reason, lineType, rawline);
         }
 
-        public TreeState AddInstruction(string rawLine, LineType rawType)
+        public TreeState AddInstruction(string rawLine)
         {
             var group = new CodelessGroupingNode();
-            var node = new Instruction(rawLine, rawType);
+            var node = new Instruction(rawLine);
             group.AddNode(node);
             Tree.Add(group);
             return new ImpliedScenarioState(Tree, group);

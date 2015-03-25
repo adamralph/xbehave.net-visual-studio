@@ -16,7 +16,7 @@ namespace xBehave.Paster.Gherkin
                 {
                     lineEnumerator.MoveNext();
                     var nextLine = lineEnumerator.Current;
-                    yield return new GherkinToken(type, line+nextLine);
+                    yield return new GherkinToken(type, line + nextLine);
                 }
                 else
                 {
@@ -27,14 +27,11 @@ namespace xBehave.Paster.Gherkin
 
         private static LineType IdentifyLineType(string line)
         {
-            if (line.StartsWith("given", StringComparison.InvariantCultureIgnoreCase))
-                return LineType.Given;
-            if (line.StartsWith("when", StringComparison.InvariantCultureIgnoreCase))
-                return LineType.When;
-            if (line.StartsWith("then", StringComparison.InvariantCultureIgnoreCase))
-                return LineType.Then;
-            if (line.StartsWith("and", StringComparison.InvariantCultureIgnoreCase))
-                return LineType.And;
+            if (line.StartsWith("given", StringComparison.InvariantCultureIgnoreCase) ||
+                line.StartsWith("when", StringComparison.InvariantCultureIgnoreCase) ||
+                line.StartsWith("then", StringComparison.InvariantCultureIgnoreCase) ||
+                line.StartsWith("and", StringComparison.InvariantCultureIgnoreCase))
+                return LineType.Instruction;
             if (line.StartsWith("scenario outline", StringComparison.InvariantCultureIgnoreCase))
                 return LineType.ScenarioOutline;
             if (line.StartsWith("scenario", StringComparison.InvariantCultureIgnoreCase))

@@ -110,7 +110,7 @@ namespace Paster.Specs
             "Then the output should be a method with an empty body"
                 .Then(() =>
                           {
-                              var expected = "\"Given that i'm testing the gherkin paster\".Given(() => {});" + Environment.NewLine;
+                              var expected = "\"Given that i'm testing the gherkin paster\".f(() => {});" + Environment.NewLine;
                               environment.TextWritten.Should()
                                          .Be(expected);
                           });

@@ -51,7 +51,7 @@ namespace Paster.Specs
 
             "then the 'double quote' character has been replaced by the 'backlash' and 'double quote' characters"
                 .Then(() => environment.LinesWritten[0].Should()
-                                                       .Be("\"Given a \\\" character\".Given(() => {});"));
+                                                       .Be("\"Given a \\\" character\".f(() => {});"));
         }
     }
 }
